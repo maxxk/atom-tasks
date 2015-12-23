@@ -1,7 +1,6 @@
 {Point, Range} = require 'atom'
 _ = require 'underscore'
 moment = require 'moment'
-CSON = require atom.config.resourcePath + "/node_modules/season/lib/cson.js"
 Grammar = require atom.config.resourcePath +
   "/node_modules/first-mate/lib/grammar.js"
 tasks = require './tasksUtilities'
@@ -74,7 +73,7 @@ module.exports =
 
 
   ###*
-   * Dynamically update the grammar CSON file
+   * Dynamically update the grammar JSON file
    * to support user-set values for markers.
   ###
   updateGrammar: ->
@@ -93,7 +92,7 @@ module.exports =
       str = str.replace '@', clean attributeMarker
 
     # Load in the grammar manually and do replacement
-    g = CSON.readFileSync __dirname + '/tasks.cson'
+    g = require(__dirname + '/tasks.json')
     # g.repository.marker.match = rep g.repository.marker.match
     g.repository.attribute.match = rep g.repository.attribute.match
     g.patterns = g.patterns.map (pattern) ->
